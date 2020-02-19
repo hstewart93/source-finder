@@ -1,0 +1,19 @@
+version: "1"
+
+services:
+  source-finder-db:
+    image: postgres
+
+  source-finder-python:
+    build:
+      context: .
+    environment:
+      - DATABASE_URL:postgres://postgres@db:5432/postgres
+      - DATABASE_NAME=postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_HOST=source_finder-db
+    volumes:
+      - .:/code
+    depends_on:
+      - source-finder-db
