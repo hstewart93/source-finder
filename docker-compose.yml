@@ -3,15 +3,18 @@ version: "3.7"
 services:
   source-finder-db:
     image: postgres
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
 
   source-finder-python:
     build:
       context: .
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=postgres
-        - POSTGRES_PORT=5432
-        - POSTGRES_DB=postgres
-        - POSTGRES_HOST=source-finder-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=source-finder-db
     volumes:
       - .:/code
     depends_on:
