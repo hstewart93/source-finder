@@ -8,10 +8,10 @@ services:
     build:
       context: .
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=postgres
+      - DATABASE_URL:postgres://postgres@db:5432/postgres
+      - DATABASE_NAME=postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
       - DATABASE_HOST=source-finder-db
     volumes:
       - .:/code
