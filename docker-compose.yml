@@ -7,12 +7,11 @@ services:
   source-finder-python:
     build:
       context: .
-    environment:
-      - DATABASE_URL:postgres://postgres@db:5432/postgres
-      - DATABASE_NAME=postgres
-      - DATABASE_USER=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_HOST=source-finder-db
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_PORT=5432
+        - POSTGRES_DB=postgres
+        - POSTGRES_HOST=source-finder-db
     volumes:
       - .:/code
     depends_on:
