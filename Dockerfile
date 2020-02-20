@@ -9,3 +9,4 @@ WORKDIR /code/$code_location
 
 RUN pip install pipenv
 RUN pipenv install --dev --system --ignore-pipfile
+RUN pre-commit install
