@@ -30,3 +30,10 @@ pre-commit install
 ```
 
 Now pre-commit hooks should run on `git commit`.
+
+You will need to create the database for the application to connect to and the relations within the database. To do this run the following commands in your terminal.
+
+```bash
+createdb source_finder
+python manage.py migrate
+```
