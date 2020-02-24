@@ -3,15 +3,15 @@
 from django.db import models
 
 
-class TrueSource(models.model):
+class TrueSource(models.Model):
     """Model to describe sources contained within a truth catalogue.
      These are the sources we believe we know characteristics of."""
 
     source_id = models.FloatField()
-    ra_core = models.CharField()
-    dec_core = models.CharField()
-    ra_centroid = models.CharField()
-    dec_centroid = models.CharField()
+    ra_core = models.CharField(max_length=255)
+    dec_core = models.CharField(max_length=255)
+    ra_centroid = models.CharField(max_length=255)
+    dec_centroid = models.CharField(max_length=255)
     flux = models.FloatField()
     core_fraction = models.FloatField()
 
@@ -23,8 +23,8 @@ class TrueSource(models.model):
     # measured clockwise for the longitute-wise direction
     position_angle = models.FloatField()
     size = models.FloatField()
-    classification = models.CharField()
-    selection = models.Boolean()
+    classification = models.CharField(max_length=255)
+    selection = models.BooleanField()
 
     # cooridnates of the centroid
     x_centroid = models.FloatField()
