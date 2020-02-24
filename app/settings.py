@@ -18,9 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Application definition
 
-INSTALLED_APPS = [
-    "training",
-]
+INSTALLED_APPS = ["training"]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "8fdhkjfs(!t678fhe37e%^3764dgys_@%6gjskksR67b"
@@ -29,8 +27,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "source_finder",
-        "USER": "source_finder",
-        "PASSWORD": "source_finder",
+        "USER": "postgres",
+        "PASSWORD": "password",
         "HOST": "localhost",
         "PORT": "5432",
     }
