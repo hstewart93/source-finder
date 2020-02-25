@@ -34,3 +34,5 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
+DJANGO_SETTINGS_MODULE = "app.settings"
