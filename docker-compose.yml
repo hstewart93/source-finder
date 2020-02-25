@@ -5,16 +5,21 @@ services:
     image: postgres
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=source-finder-db
 
   source-finder-python:
     build:
       context: .
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_PORT=5432
-      - POSTGRES_DB=postgres
-      - POSTGRES_HOST=source-finder-db
+    command: >
+      bash -c "python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8011"
+    expose:
+      - "8011"
+    ports:
+      - "8011:8011"
     volumes:
       - .:/code
     depends_on:
