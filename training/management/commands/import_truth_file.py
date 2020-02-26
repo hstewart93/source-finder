@@ -38,7 +38,8 @@ class Command(BaseCommand):
 
     @staticmethod
     def create_objects(source):
-        """"""
+        """Method to create TrueSource objects in the database given a source from
+        the file lines read in."""
         items = dict(zip(MODEL_FIELDS, source.split()))
         return TrueSource.objects.create(**items)
 
