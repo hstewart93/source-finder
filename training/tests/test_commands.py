@@ -20,8 +20,8 @@ class TestImportTruthFile:
     """Tests for the import_truth_file management command."""
 
     def test_filepath_is_required(self):
-        """"""
-        pass
+        """Test that the filepath argument is required to run the command."""
+        call_command("import_truth_file")
 
     def test_header_end_is_required(self):
         """"""
