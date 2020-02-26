@@ -55,3 +55,9 @@ class Command(BaseCommand):
             pool.map(self.create_objects, sources)
 
             print(f"Created {TrueSource.objects.all().count()} TrueSource objects")
+
+        else:
+            raise Exception(
+                "The file parsed is not of type .txt. This command currently only "
+                "supports .txt files."
+            )
