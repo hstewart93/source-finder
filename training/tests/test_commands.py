@@ -2,6 +2,8 @@ import pytest
 
 from django.core.management import call_command
 
+from training.models import TrueSource
+
 # Create a pytest fixture that creates a text file
 # can parse in content, some is valid content, some is invalid
 # make VALID_CONTENT = ""
@@ -16,14 +18,22 @@ from django.core.management import call_command
 # test no of objects created is expected from default content
 
 
+@pytest.mark.django_db
 class TestImportTruthFile:
     """Tests for the import_truth_file management command."""
 
     def test_filepath_is_required(self):
         """Test that the filepath argument is required to run the command."""
-        call_command("import_truth_file")
+        with pytest.raises(Exception):
+            call_command("import_truth_file")
 
-    def test_header_end_is_required(self):
+    def test_delete_argument(self, text_file):
+        """If the delete argument is parsed the object count will be the same as
+        the number of lines in the input file as existing data will be deleted first."""
+        call_command("import_truth_file", file_path=text_file, header_end=0)
+        assert TrueSource.objects.all.count() == 10
+
+    def test_header_end_default(self):
         """"""
         pass
 

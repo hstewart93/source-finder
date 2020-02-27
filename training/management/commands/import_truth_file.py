@@ -33,8 +33,20 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         """Add custom arguments to the management command"""
-        parser.add_argument("filepath", nargs="+", type=str)
-        parser.add_argument("header_end", nargs="+", type=int)
+
+        # Add a required argument for file_path to be added to the command
+        parser.add_argument("file_path", nargs="?", type=str)
+
+        # Add an optional argument for row number where header ends to be added to the command
+        parser.add_argument("header_end", nargs="?", type=int, default=17)
+
+        # Add an optional argument to delete existing TrueSource data
+        parser.add_argument(
+            "--delete",
+            action="store_true",
+            dest="delete",
+            help="Delete TrueSource objects.",
+        )
 
     @staticmethod
     def create_objects(source):
@@ -46,11 +58,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         """Method that reads in the file parsed as a command argument and creates
         TrueSource obejcts in the database from each row."""
-        path = options["filepath"][0]
+        if options["delete"]:
+            TrueSource.objects.all().delete()
+
+        if not options["file_path"]:
+            raise Exception("No file path found, please enter a valid file path.")
+        path = options["file_path"]
         if path.endswith(".txt"):
             with open(path, "r") as file:
                 lines = file.readlines()
-            sources = lines[options["header_end"][0] :]
+            sources = lines[options["header_end"] + 1 :]
 
             pool = Pool(processes=cpu_count())
             pool.map(self.create_objects, sources)
