@@ -33,6 +33,12 @@ class TestImportTruthFile:
         call_command("import_truth_file", file_path=text_file, header_end=0)
         assert TrueSource.objects.all.count() == 10
 
+        # Call commmand again
+        # Assert count is 20
+
+        # Call command again but pass delete flag
+        # Assert count is still 10
+
     def test_header_end_default(self):
         """"""
         pass

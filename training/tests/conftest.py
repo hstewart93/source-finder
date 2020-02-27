@@ -16,9 +16,11 @@ VALID_DATA = (
 )
 
 
-@pytest.fixture(scope="session")
-def text_file(tmpdir_factory):
+@pytest.fixture
+def text_file(tmpdir):
     """Fixture that creates a .txt file."""
-    fn = tmpdir_factory.mktemp("data").join("data.txt")
-    fn.write(VALID_DATA)
-    return fn
+    file = open(tmpdir.join("data.txt"), "w")
+    file.write(VALID_DATA)
+    # TODO: Return the file path for the command to call and fix tmpdir issue
+    # currently no directory appears to be created
+    # return f"{tmpdir.dirname}/data.txt"
