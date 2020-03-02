@@ -69,7 +69,8 @@ class Command(BaseCommand):
             with open(path, "r") as file:
                 lines = file.readlines()
             sources = lines[options["header_end"] + 1 :]
-            pool = Pool(processes=cpu_count())
+            pool = Pool(processes=1)
+            # pool = Pool(processes=cpu_count())
             pool.map(self.create_objects, sources)
 
             print(f"Created {TrueSource.objects.all().count()} TrueSource objects")

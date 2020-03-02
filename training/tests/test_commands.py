@@ -4,19 +4,6 @@ from django.core.management import call_command
 
 from training.models import TrueSource
 
-# Create a pytest fixture that creates a text file
-# can parse in content, some is valid content, some is invalid
-# make VALID_CONTENT = ""
-# make INVALID_CONTENT = ""
-# can parse in file ending
-# TEXT_FILE = ".txt", NOT_TEXT_FILE = ".csv"
-# possibly add validation to the management command or just text the
-# statement
-# test parsing the wrong file type
-# test not parsing a header_end value
-# test not parsing a filepath value
-# test no of objects created is expected from default content
-
 
 @pytest.mark.django_db
 class TestImportTruthFile:
@@ -27,34 +14,48 @@ class TestImportTruthFile:
         with pytest.raises(Exception):
             call_command("import_truth_file")
 
-    def test_delete_argument(self, text_file):
+    def test_create_objects_no_delete(self, valid_text_file):
+        """The expected number of objects are created when the command is called
+        without the delete argument."""
+        original_count = TrueSource.objects.all().count()
+        call_command("import_truth_file", file_path=valid_text_file, header_end=0)
+        assert TrueSource.objects.all().count() == original_count + 20
+
+    def test_create_objects_with_delete(self, valid_text_file):
         """If the delete argument is parsed the object count will be the same as
         the number of lines in the input file as existing data will be deleted first."""
-        call_command("import_truth_file", file_path=text_file, header_end=0)
-        assert TrueSource.objects.all().count() == 10
+        original_count = TrueSource.objects.all().count()
+        call_command("import_truth_file", file_path=valid_text_file, header_end=0)
+        new_count = TrueSource.objects.all().count()
+        assert new_count == original_count + 20
 
-        # Call commmand again
-        # Assert count is 20
+        # Call command again without delete argument
+        call_command("import_truth_file", file_path=valid_text_file, header_end=0)
+        next_count = TrueSource.objects.all().count()
+        assert next_count == new_count + 20
 
-        # Call command again but pass delete flag
-        # Assert count is still 10
+        # Call command with delete argument
+        call_command(
+            "import_truth_file", file_path=valid_text_file, header_end=0, delete=1
+        )
+        final_count = TrueSource.objects.all().count()
+        assert final_count == 20
+        assert final_count < next_count
 
-    def test_header_end_default(self):
+    def test_header_end_default(self, valid_text_file):
         """If no header_end argument parsed the default is 17."""
-        # set original object count
-        # Call command
-        # assert object count is expected if header row is 17
-        # may need to add more rows to test data
-        pass
 
-    def test_exception_raised_for_invalid_file_type(self):
-        """"""
-        pass
+        count = TrueSource.objects.all().count()
+        call_command("import_truth_file", file_path=valid_text_file)
+        assert TrueSource.objects.all().count() == count + 3
+
+    def test_exception_raised_for_invalid_file_type(self, valid_csv_file):
+        """If a file type that isn't a text file is parsed as an argument an
+        Exception is raised."""
+        with pytest.raises(Exception):
+            call_command("import_truth_file", file_path=valid_csv_file)
 
     def test_invalid_content(self):
         """"""
-        pass
-
-    def test_object_created_count(self):
-        """"""
+        # TODO: write method to test validity of content
         pass
