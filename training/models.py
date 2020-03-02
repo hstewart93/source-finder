@@ -29,3 +29,5 @@ class TrueSource(models.Model):
     # cooridnates of the centroid
     x_centroid = models.FloatField()
     y_centroid = models.FloatField()
+
+    surface_brightness = models.FloatField(null=True, blank=True)
