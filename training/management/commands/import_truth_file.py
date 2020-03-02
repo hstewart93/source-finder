@@ -1,8 +1,6 @@
-import numpy as np
 import os
 
 from django.core.management.base import BaseCommand
-from django.conf import settings
 from multiprocessing import cpu_count, Pool
 
 from training.models import TrueSource
@@ -53,13 +51,7 @@ class Command(BaseCommand):
         )
 
     @staticmethod
-    def calculate_surface_brightness(source):
-        """Method to calculate surface brightness of a source."""
-        if source.bmaj > 0 or source.bmin > 0:
-            ellipse_area = np.pi * source.bmaj * source.bmin
-            return source.flux * settings.PIX_TO_ARCSECONDS / ellipse_area
-
-    def create_objects(self, source):
+    def create_objects(source):
         """Method to create TrueSource objects in the database given a source from
         the file lines read in."""
         items = dict(zip(MODEL_FIELDS, source.split()))
@@ -78,7 +70,6 @@ class Command(BaseCommand):
             with open(path, "r") as file:
                 lines = file.readlines()
             sources = lines[options["header_end"] + 1 :]
-            # pool = Pool(processes=1) # For running tests
             pool = Pool(processes=cpu_count())
             pool.map(self.create_objects, sources)
 
