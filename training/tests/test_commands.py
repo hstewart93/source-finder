@@ -44,7 +44,6 @@ class TestImportTruthFile:
 
     def test_header_end_default(self, valid_text_file):
         """If no header_end argument parsed the default is 17."""
-
         count = TrueSource.objects.all().count()
         call_command("import_truth_file", file_path=valid_text_file)
         assert TrueSource.objects.all().count() == count + 3
