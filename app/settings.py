@@ -72,3 +72,7 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
+
+# Setting for pixel size in arcseconds
+PIX_TO_ARCSECONDS = 0.6
