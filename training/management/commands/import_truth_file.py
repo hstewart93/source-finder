@@ -1,3 +1,5 @@
+import os
+
 from django.core.management.base import BaseCommand
 from multiprocessing import cpu_count, Pool
 
@@ -60,15 +62,13 @@ class Command(BaseCommand):
         TrueSource obejcts in the database from each row."""
         if options["delete"]:
             TrueSource.objects.all().delete()
-
         if not options["file_path"]:
             raise Exception("No file path found, please enter a valid file path.")
         path = options["file_path"]
-        if path.endswith(".txt"):
+        if os.path.splitext(path)[-1] == ".txt":
             with open(path, "r") as file:
                 lines = file.readlines()
             sources = lines[options["header_end"] + 1 :]
-
             pool = Pool(processes=cpu_count())
             pool.map(self.create_objects, sources)
 

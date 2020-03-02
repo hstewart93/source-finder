@@ -19,8 +19,6 @@ VALID_DATA = (
 @pytest.fixture
 def text_file(tmpdir):
     """Fixture that creates a .txt file."""
-    file = open(tmpdir.join("data.txt"), "w")
+    file = tmpdir.mkdir("sub").join("data.txt")
     file.write(VALID_DATA)
-    # TODO: Return the file path for the command to call and fix tmpdir issue
-    # currently no directory appears to be created
-    # return f"{tmpdir.dirname}/data.txt"
+    return file

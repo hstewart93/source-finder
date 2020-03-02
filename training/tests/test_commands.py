@@ -31,7 +31,7 @@ class TestImportTruthFile:
         """If the delete argument is parsed the object count will be the same as
         the number of lines in the input file as existing data will be deleted first."""
         call_command("import_truth_file", file_path=text_file, header_end=0)
-        assert TrueSource.objects.all.count() == 10
+        assert TrueSource.objects.all().count() == 10
 
         # Call commmand again
         # Assert count is 20
@@ -40,7 +40,11 @@ class TestImportTruthFile:
         # Assert count is still 10
 
     def test_header_end_default(self):
-        """"""
+        """If no header_end argument parsed the default is 17."""
+        # set original object count
+        # Call command
+        # assert object count is expected if header row is 17
+        # may need to add more rows to test data
         pass
 
     def test_exception_raised_for_invalid_file_type(self):
