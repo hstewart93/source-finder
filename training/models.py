@@ -1,6 +1,7 @@
-"""Models to describe the data from the truth catalogue and the generated training data set."""
+import numpy as np
 
 from django.db import models
+from django.conf import settings
 
 
 class TrueSource(models.Model):
@@ -19,7 +20,7 @@ class TrueSource(models.Model):
     bmaj = models.FloatField()
     bmin = models.FloatField()
 
-    # postition_angle is in units of degrees
+    # position_angle is in units of degrees
     # measured clockwise for the longitute-wise direction
     position_angle = models.FloatField()
     size = models.FloatField()
@@ -31,3 +32,15 @@ class TrueSource(models.Model):
     y_centroid = models.FloatField()
 
     surface_brightness = models.FloatField(null=True, blank=True)
+
+    def calculate_surface_brightness(self):
+        """Method to calculate surface brightness of a source."""
+        if not self.bmaj == 0 or not self.bmin == 0:
+            ellipse_area = np.pi * self.bmaj * self.bmin
+            return self.flux * settings.PIX_TO_ARCSECONDS / ellipse_area
+
+    def save(self, *args, **kwargs):
+        """Override the save method to auto-populate the surface brightness field."""
+        if not self.surface_brightness:
+            self.surface_brightness = self.calculate_surface_brightness()
+        super(TrueSource, self).save(*args, **kwargs)

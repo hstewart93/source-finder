@@ -55,7 +55,6 @@ class Command(BaseCommand):
         """Method to create TrueSource objects in the database given a source from
         the file lines read in."""
         items = dict(zip(MODEL_FIELDS, source.split()))
-        # items.update({"surface_brightness": self.calculate_surface_brightness(source)})
         return TrueSource.objects.create(**items)
 
     def handle(self, *args, **options):
