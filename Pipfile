@@ -10,10 +10,14 @@ ipdb = "==0.12.3"
 pre-commit = "==2.0.1"
 pytest = "==5.3.5"
 pytest-django = "==3.8.0"
+django-extensions = "==2.2.9"
 
 [packages]
 django = "==3.0.3"
 psycopg2-binary = "==2.8.4"
+astropy = "==4.0.1.post1"
+matplotlib = "==3.2.1"
+numpy = "==1.18.5"
 
 [requires]
 python_version = "3.7"

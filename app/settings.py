@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ["localhost"]
 INSTALLED_APPS = [
     # Project apps
     "training",
+    "visualisation",
     # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sites",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -72,3 +74,6 @@ DATABASES = {
         "PORT": "5432",
     }
 }
+
+# Setting for pixel size in arcseconds
+PIX_TO_ARCSECONDS = 0.6
