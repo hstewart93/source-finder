@@ -26,7 +26,7 @@ class TrueSource(models.Model):
     classification = models.CharField(max_length=255)
     selection = models.BooleanField()
 
-    # co-oridnates of the centroid
+    # co-ordinates of the centroid
     x_centroid = models.FloatField()
     y_centroid = models.FloatField()
 
