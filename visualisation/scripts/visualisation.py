@@ -2,7 +2,12 @@ from django.conf import settings
 from matplotlib import pyplot as plt
 from matplotlib.patches import Ellipse
 
-from visualisation.fits_functions import read_in_fits, create_sub_image
+from visualisation.fits_functions import (
+    clip_image,
+    convolve_image,
+    create_sub_image,
+    read_in_fits,
+)
 from visualisation.true_source_functions import get_subset, surface_brightness_for_set
 
 # Constants
@@ -33,10 +38,17 @@ def plot_ellipse_on_image(image, query_set):
             height=source.bmaj / settings.PIX_TO_ARCSECONDS,
             angle=source.position_angle,
             fill=False,
-            edgecolor="orange",
-            alpha=0.7,
+            edgecolor="cyan",
+            alpha=0.5,
         )
         ax.add_patch(ellipse)
+
+
+def plot_convolved_clipped_image(image):
+    """"""
+    convolved_image = convolve_image(image)
+    clipped_image = clip_image(convolved_image, 0)
+    plt.imshow(clipped_image)
 
 
 # Load in and open fits file
@@ -53,4 +65,5 @@ sorted_set = surface_brightness_for_set(source_set).order_by("-flux")
 
 # plot_source_centers_on_image(sub_image, source_set)
 plot_ellipse_on_image(sub_image, sorted_set)
+# plot_convolved_clipped_image(sub_image)
 plt.show()

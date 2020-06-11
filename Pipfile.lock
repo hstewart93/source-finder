@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c4ee3ebe832da54311d3af2dbebb40c01ec2eb566b231a0ad56c4f7bbce2ec41"
+            "sha256": "8f46b074f3923b11653ce0d4e00b3a8486d738a80f7856a706f0b39c2ac567f6"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -186,6 +186,13 @@
             ],
             "version": "==2020.1"
         },
+        "radio-beam": {
+            "hashes": [
+                "sha256:c2b5beabc12a52ba8911d3dd054e455bba3902db19bb07cc5243803d63c4363c"
+            ],
+            "index": "pypi",
+            "version": "==0.3.2"
+        },
         "six": {
             "hashes": [
                 "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
@@ -305,10 +312,10 @@
         },
         "identify": {
             "hashes": [
-                "sha256:9f53e80371f2ac7c969eefda8efaabd4f77c6300f5f8fc4b634744a0db8fe5cc",
-                "sha256:de4e1de6c23f52b71c8a54ff558219f3783ff011b432f29360d84a8a31ba561c"
+                "sha256:249ebc7e2066d6393d27c1b1be3b70433f824a120b1d8274d362f1eb419e3b52",
+                "sha256:781fd3401f5d2b17b22a8b18b493a48d5d948e3330634e82742e23f9c20234ef"
             ],
-            "version": "==1.4.18"
+            "version": "==1.4.19"
         },
         "importlib-metadata": {
             "hashes": [
