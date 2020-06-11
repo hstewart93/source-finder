@@ -14,6 +14,12 @@ def get_subset(y_min, x_min, size):
     )
 
 
+def get_sorted_subset(y_min, x_min, size, sort_by):
+    """"""
+    source_set = get_subset(y_min, x_min, size)
+    return source_set.order_by(sort_by)
+
+
 def calculate_surface_brightness(source):
     """Method to calculate surface brightness of a source."""
     if not source.bmaj == 0 or not source.bmin == 0:

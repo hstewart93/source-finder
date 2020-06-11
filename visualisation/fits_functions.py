@@ -24,6 +24,13 @@ def create_sub_image(image, y_min, x_min, size):
         return image[y_min : y_min + size, x_min : x_min + size]
 
 
+def load_sub_image_data(filename, y_min, x_min, size):
+    """Load in FITS file and create sub section of image data given x,y
+    pixel limits"""
+    image_data = read_in_fits(filename)
+    return create_sub_image(image_data, y_min, x_min, size)
+
+
 def create_image_cut_around_source(image, y_center, x_center, size):
     """Function to create a sub image of an image around the center
     of a source for a given size"""
@@ -39,32 +46,6 @@ def create_image_cut_around_source(image, y_center, x_center, size):
             int(y_center - size) : int(y_center + size),
             int(x_center - size) : int(x_center + size),
         ]
-
-
-#
-# def clip_image():
-#     from astropy.convolution import convolve
-#     from astropy import units as u
-#     from radio_beam import Beam
-#
-#     nan_array = np.isnan(image_data)
-#
-#     if True in nan_array:
-#         print("True")
-#     else:
-#         print("False")
-#
-#     fits_header = fits.getheader(filename)
-#     my_beam = Beam.from_fits_header(fits_header)
-#     beam = Beam(1.5000000363216 * u.arcsec)
-#
-#     pix_scale = 0.6 * u.arcsec
-#
-#     sub_image = image_data[0, 0, 17500:18000, 16500:17000]
-#     # sub_image = image_data[0, 0, 15000:15500, 15000:15500]
-#
-#     gauss_kernel = beam.as_kernel(pix_scale)
-#     image_convolved = convolve(sub_image, gauss_kernel)
 
 
 def gauss_kernel(beam, pixel_scale):
