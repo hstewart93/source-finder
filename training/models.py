@@ -19,13 +19,16 @@ class TrueSource(models.Model):
     bmaj = models.FloatField()
     bmin = models.FloatField()
 
-    # postition_angle is in units of degrees
+    # position_angle is in units of degrees
     # measured clockwise for the longitute-wise direction
     position_angle = models.FloatField()
     size = models.FloatField()
     classification = models.CharField(max_length=255)
     selection = models.BooleanField()
 
-    # cooridnates of the centroid
+    # co-ordinates of the centroid
     x_centroid = models.FloatField()
     y_centroid = models.FloatField()
+
+    # surface brightness field to be populated on save
+    surface_brightness = models.FloatField(null=True, blank=True)
