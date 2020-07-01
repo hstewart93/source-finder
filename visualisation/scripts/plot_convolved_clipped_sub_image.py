@@ -1,6 +1,10 @@
 from matplotlib import pyplot as plt
 
-from visualisation.fits_functions import clip_image, convolve_image, load_sub_image_data
+from visualisation.fits_functions import (
+    clip_image,
+    convolve_image_gaussian,
+    load_sub_image_data,
+)
 
 # Constants
 FILENAME = "/Users/bi19158/Code/ska-challenge-1/SKAMid_B1_8h_v3.fits"
@@ -10,8 +14,8 @@ SIZE = 500
 
 
 def plot_convolved_clipped_image(image):
-    """"""
-    convolved_image = convolve_image(image)
+    """Convolve image with Gaussian and clip to zero, then plot image"""
+    convolved_image = convolve_image_gaussian(image)
     clipped_image = clip_image(convolved_image, 0)
     plt.imshow(clipped_image)
 

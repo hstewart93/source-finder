@@ -15,7 +15,7 @@ def get_subset(y_min, x_min, size):
 
 
 def get_sorted_subset(y_min, x_min, size, sort_by):
-    """"""
+    """Order subset by given field"""
     source_set = get_subset(y_min, x_min, size)
     return source_set.order_by(sort_by)
 

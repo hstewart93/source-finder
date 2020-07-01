@@ -49,17 +49,17 @@ def create_image_cut_around_source(image, y_center, x_center, size):
 
 
 def gauss_kernel(beam, pixel_scale):
-    """"""
+    """Generate Gaussian kernel of beam size"""
     converted_beam = Beam(beam * units.arcsec)
     return converted_beam.as_kernel(pixel_scale * units.arcsec)
 
 
-def convolve_image(image):
-    """"""
+def convolve_image_gaussian(image):
+    """Convolve given image with Gaussian kernel"""
     return convolve(image, gauss_kernel(BEAM, settings.PIX_TO_ARCSECONDS))
 
 
 def clip_image(image, clip_limit):
-    """"""
+    """Clip all pixel values in image below zero to zero"""
     image[image < clip_limit] = 0
     return image

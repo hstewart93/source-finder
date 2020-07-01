@@ -11,7 +11,7 @@ SIZE = 500
 
 
 def plot_source_centers_on_image(image, query_set):
-    """"""
+    """Plot image with labels from truth catalogues as x markers on source centers"""
     y_values = [source.y_centroid - Y_MIN for source in query_set]
     x_values = [source.x_centroid - X_MIN for source in source_set]
 

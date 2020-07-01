@@ -13,7 +13,7 @@ SIZE = 500
 
 
 def plot_ellipse_on_image(image, query_set):
-    """"""
+    """Plot image with labels from truth catalogue as ellipses"""
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.imshow(image)
 
