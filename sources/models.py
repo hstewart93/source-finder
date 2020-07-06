@@ -1,4 +1,4 @@
-"""Models to describe the data from the truth catalogue and the generated training data set."""
+"""Models to describe the data from the truth catalogue and the generated sources data set."""
 
 from django.db import models
 

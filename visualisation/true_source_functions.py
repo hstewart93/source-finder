@@ -1,7 +1,7 @@
 from django.conf import settings
 import numpy as np
 
-from training.models import TrueSource
+from sources.models import TrueSource
 
 
 def get_subset(y_min, x_min, size):
