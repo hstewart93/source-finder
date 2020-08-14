@@ -34,3 +34,9 @@ def surface_brightness_for_set(query_set):
             source.surface_brightness = calculate_surface_brightness(source)
             source.save()
     return query_set
+
+
+def convert_arcseconds_to_pix(value, scaling_factor=settings.PIX_TO_ARCSECONDS):
+    """Uses PIX_TO_ARCSECONDS from settings.py to convert a measurement
+    from arcseconds to pixels."""
+    return value / scaling_factor
