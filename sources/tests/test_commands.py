@@ -2,7 +2,7 @@ import pytest
 
 from django.core.management import call_command
 
-from training.models import TrueSource
+from sources.models import TrueSource
 
 
 @pytest.mark.django_db

@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 
-from visualisation.fits_functions import load_sub_image_data
-from visualisation.true_source_functions import get_subset
+from app.fits_functions import load_sub_image_data
+from app.true_source_functions import get_subset
 
 # Constants
 FILENAME = "/Users/bi19158/Code/ska-challenge-1/SKAMid_B1_8h_v3.fits"

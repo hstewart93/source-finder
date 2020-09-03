@@ -1,16 +1,16 @@
 from django.conf import settings
 import numpy as np
 
-from training.models import TrueSource
+from sources.models import TrueSource
 
 
 def get_subset(y_min, x_min, size):
     """Get subset of TrueSource catalogue for sub_image pixel limits"""
     return TrueSource.objects.filter(
-        y_centroid__gt=y_min,
-        y_centroid__lt=y_min + size,
-        x_centroid__gt=x_min,
-        x_centroid__lt=x_min + size,
+        y_centroid__gte=y_min,
+        y_centroid__lte=y_min + size,
+        x_centroid__gte=x_min,
+        x_centroid__lte=x_min + size,
     )
 
 
@@ -34,3 +34,9 @@ def surface_brightness_for_set(query_set):
             source.surface_brightness = calculate_surface_brightness(source)
             source.save()
     return query_set
+
+
+def convert_arcseconds_to_pix(value, scaling_factor=settings.PIX_TO_ARCSECONDS):
+    """Uses PIX_TO_ARCSECONDS from settings.py to convert a measurement
+    from arcseconds to pixels."""
+    return value / scaling_factor

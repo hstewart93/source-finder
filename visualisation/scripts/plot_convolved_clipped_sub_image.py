@@ -1,10 +1,6 @@
 from matplotlib import pyplot as plt
 
-from visualisation.fits_functions import (
-    clip_image,
-    convolve_image_gaussian,
-    load_sub_image_data,
-)
+from app.fits_functions import clip_image, convolve_image_gaussian, load_sub_image_data
 
 # Constants
 FILENAME = "/Users/bi19158/Code/ska-challenge-1/SKAMid_B1_8h_v3.fits"

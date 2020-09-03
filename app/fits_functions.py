@@ -10,9 +10,8 @@ BEAM = 1.5000000363216
 
 
 def read_in_fits(filename):
-    """Reads in a FITS file and returns an array"""
-    hdul = fits.open(filename)["PRIMARY"]
-    return hdul.data
+    """Reads in a FITS file and returns all data and header information"""
+    return fits.open(filename)["PRIMARY"]
 
 
 def create_sub_image(image, y_min, x_min, size):
@@ -27,7 +26,8 @@ def create_sub_image(image, y_min, x_min, size):
 def load_sub_image_data(filename, y_min, x_min, size):
     """Load in FITS file and create sub section of image data given x,y
     pixel limits"""
-    image_data = read_in_fits(filename)
+    fits_image = read_in_fits(filename)
+    image_data = fits_image.data
     return create_sub_image(image_data, y_min, x_min, size)
 
 

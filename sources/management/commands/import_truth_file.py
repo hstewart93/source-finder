@@ -3,7 +3,7 @@ import os
 from django.core.management.base import BaseCommand
 from multiprocessing import cpu_count, Pool
 
-from training.models import TrueSource
+from sources.models import TrueSource
 
 
 MODEL_FIELDS = [
