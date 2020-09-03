@@ -22,6 +22,7 @@ ALLOWED_HOSTS = ["localhost"]
 INSTALLED_APPS = [
     # Project apps
     "sources",
+    "training",
     "visualisation",
     # Django apps
     "django.contrib.admin",
